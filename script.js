@@ -63,7 +63,6 @@ class Square {
         this.id = id;
 
         this.container.addEventListener('mouseover', () => {
-            console.log(`Clicked row ${this.row} square ${this.id}`)
             this.setColor(COLOR);
         });
     }
