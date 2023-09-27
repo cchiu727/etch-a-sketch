@@ -36,14 +36,14 @@ class Toolbar {
         for (const color of this.colorList) {
             const colorTool = new ColorTool(document.createElement('button'), color);
             colorTool.container.id = `${color}-tool`;
-            colorTool.container.classList.add('color-tool');
+            colorTool.container.classList.add('tool');
             colorTool.container.style.backgroundColor = color;
             this.container.appendChild(colorTool.container);
         }
 
         const eraseTool = new EraseTool(document.createElement('button'));
         eraseTool.container.id = 'erase-tool';
-        eraseTool.container.classList.add('color-tool');
+        eraseTool.container.classList.add('tool');
         eraseTool.container.textContent = 'Eraser';
         this.container.appendChild(eraseTool.container);
     }
