@@ -1,0 +1,37 @@
+h1 {
+    text-align: center;
+}
+
+main {
+    display: flex;
+    justify-content: justify-content;
+    gap: 25px;
+}
+
+.toolbar-container {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+}
+
+.color-tool {
+    width: 50px;
+    height: 50px;
+}
+
+.grid-container {
+    width: fit-content;
+    border: 1px solid black;
+}
+
+.grid-container .row {
+    display: flex;
+}
+
+.grid-container .row .square{
+    border: 1px solid black;
+    width: 40px;
+    height: 40px;
+}
