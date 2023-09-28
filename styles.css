@@ -43,6 +43,10 @@ main {
     text-align: center;
 }
 
+.tool:active {
+    border: 3px solid #555555;
+}
+
 .grid-container {
     width: fit-content;
     height: fit-content;
