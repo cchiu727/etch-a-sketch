@@ -26,7 +26,7 @@ class EraseTool {
         this.container.textContent = 'Eraser';
         this.container.addEventListener('click', () => {
             console.log(`Changed to eraser tool`);
-            setColor('white');
+            setColor('initial');
         });
     }
 }
@@ -86,7 +86,13 @@ class Square {
 
     setColor(color) {
         this.container.style.backgroundColor = color;
-        this.container.style.border = `1px solid ${color}`;
+
+        if (color === 'initial') {
+            this.container.style.border = '1px solid rgb(231, 231, 231)';
+        }
+        else {
+            this.container.style.border = `1px solid ${color}`;
+        }
     }
 }
 
@@ -136,5 +142,14 @@ gridSizeForm.addEventListener('submit', (event) => {
     let width = document.getElementById('width-field').value;
     let height = document.getElementById('height-field').value;
     document.getElementById('grid-container').innerHTML = '';
-    grid = new Grid(document.getElementById('grid-container'), width, height);
+    if (width > 100 && height > 100) {
+        alert('Grid size too big!');
+        grid = new Grid(document.getElementById('grid-container'));
+    }    
+    else if (width === '' || height === ''){
+        grid = new Grid(document.getElementById('grid-container'));
+    }
+    else {
+        grid = new Grid(document.getElementById('grid-container'), width, height);
+    }
 });
