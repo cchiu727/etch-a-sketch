@@ -7,6 +7,9 @@ function setColor(color) {
 class ColorTool {
     constructor(container, color) {
         this.container = container;
+        this.container.id = `${color}-tool`;
+        this.container.classList.add('tool');
+        this.container.style.backgroundColor = color;
         this.color = color;
         this.container.addEventListener('click', () => {
             console.log(`Changed color tool to ${this.color}`);
@@ -18,10 +21,26 @@ class ColorTool {
 class EraseTool {
     constructor(container) {
         this.container = container;
+        this.container.id = 'erase-tool';
+        this.container.classList.add('tool');
+        this.container.textContent = 'Eraser';
         this.container.addEventListener('click', () => {
             console.log(`Changed to eraser tool`);
             setColor('white');
         });
+    }
+}
+
+class ClearTool {
+    constructor(container) {
+        this.container = container;
+        this.container.id = 'clear-tool';
+        this.container.classList.add('tool');
+        this.container.textContent = 'Clear';
+        this.container.addEventListener('click', () => {
+            console.log('Cleared grid');
+            grid.clearGrid();
+        })
     }
 }
 
@@ -35,17 +54,15 @@ class Toolbar {
     populateTools() {
         for (const color of this.colorList) {
             const colorTool = new ColorTool(document.createElement('button'), color);
-            colorTool.container.id = `${color}-tool`;
-            colorTool.container.classList.add('tool');
-            colorTool.container.style.backgroundColor = color;
             this.container.appendChild(colorTool.container);
         }
 
         const eraseTool = new EraseTool(document.createElement('button'));
-        eraseTool.container.id = 'erase-tool';
-        eraseTool.container.classList.add('tool');
-        eraseTool.container.textContent = 'Eraser';
         this.container.appendChild(eraseTool.container);
+        eraseTool.container 
+
+        const clearTool = new ClearTool(document.createElement('button'));
+        this.container.appendChild(clearTool.container);
     }
 }
 
@@ -69,6 +86,7 @@ class Square {
 
     setColor(color) {
         this.container.style.backgroundColor = color;
+        this.container.style.border = `1px solid ${color}`;
     }
 }
 
@@ -96,9 +114,27 @@ class Grid {
             }
         }
     }
+
+    clearGrid() {
+        let squares = this.container.querySelectorAll('#grid-container .square');
+
+        squares.forEach(function(square) {
+            square.style.backgroundColor = 'initial';
+            square.style.border = '1px solid rgb(231, 231, 231)';
+        });
+    }
 }
 
 let toolbar = new Toolbar(document.getElementById('toolbar-container'));
 
 let grid = new Grid(document.getElementById('grid-container'));
 
+const gridSizeForm = document.getElementById('grid-size-form-container');
+
+gridSizeForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    let width = document.getElementById('width-field').value;
+    let height = document.getElementById('height-field').value;
+    document.getElementById('grid-container').innerHTML = '';
+    grid = new Grid(document.getElementById('grid-container'), width, height);
+});
